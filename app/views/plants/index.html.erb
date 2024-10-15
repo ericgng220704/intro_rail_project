@@ -1,0 +1,88 @@
+<div class="flex">
+  <!-- Filters Sidebar -->
+  <div class="w-1/4 p-4 bg-gray-100">
+    <h2 class="text-xl font-bold mb-4">Filters</h2>
+    <!-- Light Filter -->
+    <div class="mb-4">
+      <h3 class="font-semibold text-lg">Light</h3>
+      <div class="mt-2">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-2">
+          <span>Sunny (5+ hours of direct sunlight)</span>
+        </label>
+        <label class="flex items-center mt-1">
+          <input type="checkbox" class="mr-2">
+          <span>Partial Shade/Indirect Light (2-4 hours)</span>
+        </label>
+        <label class="flex items-center mt-1">
+          <input type="checkbox" class="mr-2">
+          <span>Shade (0-2 hours)</span>
+        </label>
+      </div>
+    </div>
+    <!-- Maximum Size Filter -->
+    <div class="mb-4">
+      <h3 class="font-semibold text-lg">Maximum Size</h3>
+      <div class="mt-2">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-2">
+          <span>Small (20cm to 50cm)</span>
+        </label>
+        <label class="flex items-center mt-1">
+          <input type="checkbox" class="mr-2">
+          <span>Medium (50cm to 100cm)</span>
+        </label>
+        <label class="flex items-center mt-1">
+          <input type="checkbox" class="mr-2">
+          <span>Large (100cm to 300cm)</span>
+        </label>
+      </div>
+    </div>
+    <!-- Suitable for Filter -->
+    <div class="mb-4">
+      <h3 class="font-semibold text-lg">Suitable for</h3>
+      <div class="mt-2">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-2">
+          <span>Planting in a pot</span>
+        </label>
+        <label class="flex items-center mt-1">
+          <input type="checkbox" class="mr-2">
+          <span>Planting in the ground</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plants List -->
+  <div class="w-3/4 p-4">
+    <h1 class="text-3xl !text-red-400 font-bold">All Plants</h1>
+    <ul class="grid grid-cols-4 gap-4 mt-4">
+      <% @plants.each do |plant| %>
+        <li class="list-none">
+          <%= link_to plant_path(plant), class: "block bg-white rounded-lg shadow overflow-hidden" do %>
+            <div class="relative flex min-h-60 min-w-56 overflow-hidden items-center gap-4">
+              <div class="h-full w-full bg-slate-300 rounded overflow-hidden">
+                <% if plant.image_url.present? %>
+                  <img src="<%= plant.image_url %>" alt="<%= plant.common_name %>" class="min-h-60 min-w-56 h-full w-full object-fill rounded">
+                <% else %>
+                  <div class="min-h-60 min-w-56 bg-slate-500 bg-opacity-55 rounded"></div>
+                <% end %>
+              </div>
+
+              <div class="absolute bottom-2 flex w-full items-center justify-center px-4">
+                <div class="w-full bg-white p-2">
+                  <h3 class="text-lg font-semibold">
+                    <%= plant.common_name %>
+                  </h3>
+                  <p class="text-sm text-gray-600 font-semibold"><%= plant.scientific_name %></p>
+                  <p class="text-sm"><%= plant.type.name %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

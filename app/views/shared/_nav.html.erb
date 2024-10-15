@@ -1,0 +1,28 @@
+<!-- app/views/layouts/_navbar.html.erb -->
+<nav class="bg-green-500 p-4">
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <div class="text-lg font-bold text-white"><%= link_to "Plant App", root_path %></div>
+
+    <!-- Hamburger Menu (Visible on Small Screens) -->
+    <div class="md:hidden">
+      <button id="hamburger" class="text-white focus:outline-none">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Links for Navigation (hidden on small screens) -->
+    <ul id="nav-links" class="hidden space-x-6 text-white md:flex">
+      <li><%= link_to "Home", root_path, class: "hover:underline" %></li>
+      <li><%= link_to "Plants", plants_path, class: "hover:underline" %></li>
+    </ul>
+  </div>
+
+  <!-- Mobile Menu Links (toggle visibility) -->
+  <ul id="mobile-nav" class="mt-4 hidden flex-col space-y-4 text-white md:hidden">
+    <li><%= link_to "Home", root_path, class: "hover:underline" %></li>
+    <li><%= link_to "Plants", plants_path, class: "hover:underline" %></li>
+  </ul>
+</nav>

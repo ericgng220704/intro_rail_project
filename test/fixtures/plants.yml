@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  common_name: MyString
+  other_names: MyText
+  scientific_name: MyString
+  family: MyString
+  description: MyText
+  image_url: MyString
+  origin: one
+  type: one
+  watering: one
+  growth_rate: one
+  care: one
+  thorny: false
+  invasive: false
+  tropical: false
+  indoor: false
+  flower: false
+  cones: false
+  fruits: false
+  edible_fruit: false
+  medicinal: false
+  poisonous_to_humans: 1
+  poisonous_to_pets: 1
+
+two:
+  common_name: MyString
+  other_names: MyText
+  scientific_name: MyString
+  family: MyString
+  description: MyText
+  image_url: MyString
+  origin: two
+  type: two
+  watering: two
+  growth_rate: two
+  care: two
+  thorny: false
+  invasive: false
+  tropical: false
+  indoor: false
+  flower: false
+  cones: false
+  fruits: false
+  edible_fruit: false
+  medicinal: false
+  poisonous_to_humans: 1
+  poisonous_to_pets: 1
