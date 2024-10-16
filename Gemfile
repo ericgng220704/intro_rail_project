@@ -22,6 +22,9 @@ gem 'tailwindcss-rails'
 gem 'httparty'
 gem 'dotenv-rails', groups: [:development, :test]
 
+gem 'kaminari'
+
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

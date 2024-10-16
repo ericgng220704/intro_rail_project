@@ -1,62 +1,98 @@
 <div class="flex">
   <!-- Filters Sidebar -->
-  <div class="w-1/4 p-4 bg-gray-100">
+  <div class="w-1/4 p-4">
+  <%= form_with(url: plants_path, method: :get, local: true) do %>
     <h2 class="text-xl font-bold mb-4">Filters</h2>
-    <!-- Light Filter -->
+
+    <!-- Type Filter -->
     <div class="mb-4">
-      <h3 class="font-semibold text-lg">Light</h3>
-      <div class="mt-2">
-        <label class="flex items-center">
-          <input type="checkbox" class="mr-2">
-          <span>Sunny (5+ hours of direct sunlight)</span>
-        </label>
-        <label class="flex items-center mt-1">
-          <input type="checkbox" class="mr-2">
-          <span>Partial Shade/Indirect Light (2-4 hours)</span>
-        </label>
-        <label class="flex items-center mt-1">
-          <input type="checkbox" class="mr-2">
-          <span>Shade (0-2 hours)</span>
-        </label>
+      <label class="block font-semibold mb-2">Type</label>
+      <select name="type" class="border rounded p-2 w-full">
+        <option value="">All Types</option>
+        <% Type.all.each do |type| %>
+          <option value="<%= type.id %>" <%= 'selected' if params[:type].to_s == type.id.to_s %>><%= type.name %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <!-- Characteristics Filter -->
+    <div class="mb-4">
+      <h3 class="font-semibold mb-2">Characteristics</h3>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="thorny" id="thorny" <%= 'checked' if params[:thorny] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="thorny">Thorny</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="tropical" id="tropical" <%= 'checked' if params[:tropical] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="tropical">Tropical</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="indoor" id="indoor" <%= 'checked' if params[:indoor] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="indoor">Indoor</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="invasive" id="invasive" <%= 'checked' if params[:invasive] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="invasive">Invasive</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="flower" id="flower" <%= 'checked' if params[:flower] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="flower">Flower</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="cones" id="cones" <%= 'checked' if params[:cones] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="cones">Cones</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="fruits" id="fruits" <%= 'checked' if params[:fruits] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="fruits">Fruits</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="edible_fruit" id="edible_fruit" <%= 'checked' if params[:edible_fruit] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="edible_fruit">Edible Fruits</label>
+      </div>
+      <div class="flex items-center mb-2">
+        <input type="checkbox" name="medicinal" id="medicinal" <%= 'checked' if params[:medicinal] == '1' %> value="1" class="mr-2 rounded-full">
+        <label for="medicinal">Medicinal</label>
       </div>
     </div>
-    <!-- Maximum Size Filter -->
+
+    <!-- Plant Care Filter -->
     <div class="mb-4">
-      <h3 class="font-semibold text-lg">Maximum Size</h3>
-      <div class="mt-2">
-        <label class="flex items-center">
-          <input type="checkbox" class="mr-2">
-          <span>Small (20cm to 50cm)</span>
-        </label>
-        <label class="flex items-center mt-1">
-          <input type="checkbox" class="mr-2">
-          <span>Medium (50cm to 100cm)</span>
-        </label>
-        <label class="flex items-center mt-1">
-          <input type="checkbox" class="mr-2">
-          <span>Large (100cm to 300cm)</span>
-        </label>
-      </div>
+      <label class="block font-semibold mb-2">Watering</label>
+      <select name="watering" class="border rounded p-2 w-full">
+        <option value="">All</option>
+        <% Watering.all.each do |watering| %>
+          <option value="<%= watering.id %>" <%= 'selected' if params[:watering].to_s == watering.id.to_s %>><%= watering.level %></option>
+        <% end %>
+      </select>
     </div>
-    <!-- Suitable for Filter -->
+
     <div class="mb-4">
-      <h3 class="font-semibold text-lg">Suitable for</h3>
-      <div class="mt-2">
-        <label class="flex items-center">
-          <input type="checkbox" class="mr-2">
-          <span>Planting in a pot</span>
-        </label>
-        <label class="flex items-center mt-1">
-          <input type="checkbox" class="mr-2">
-          <span>Planting in the ground</span>
-        </label>
-      </div>
+      <label class="block font-semibold mb-2">Growth Rate</label>
+      <select name="growth_rate" class="border rounded p-2 w-full">
+        <option value="">All</option>
+        <% GrowthRate.all.each do |growth_rate| %>
+          <option value="<%= growth_rate.id %>" <%= 'selected' if params[:growth_rate].to_s == growth_rate.id.to_s %>><%= growth_rate.level %></option>
+        <% end %>
+      </select>
     </div>
-  </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="bg-green-500 text-white p-2 rounded">Apply Filters</button>
+  <% end %>
+</div>
+
 
   <!-- Plants List -->
   <div class="w-3/4 p-4">
-    <h1 class="text-3xl !text-red-400 font-bold">All Plants</h1>
+    <h1 class="text-3xl !text-green-400 font-bold">All Plants</h1>
+
+    <!-- Search Form -->
+    <%= form_with(url: plants_path, method: :get, local: true) do %>
+      <input type="text" name="search" value="<%= params[:search] %>" placeholder="Search plants..." class="border rounded p-2 w-full md:w-1/2 mb-4">
+      <button type="submit" class="bg-green-500 text-white p-2 rounded">Search</button>
+    <% end %>
+
     <ul class="grid grid-cols-4 gap-4 mt-4">
       <% @plants.each do |plant| %>
         <li class="list-none">
@@ -66,17 +102,17 @@
                 <% if plant.image_url.present? %>
                   <img src="<%= plant.image_url %>" alt="<%= plant.common_name %>" class="min-h-60 min-w-56 h-full w-full object-fill rounded">
                 <% else %>
-                  <div class="min-h-60 min-w-56 bg-slate-500 bg-opacity-55 rounded"></div>
+                  <div class="min-h-60 min-w-56 bg-gray-300 bg-opacity-55 rounded"></div>
                 <% end %>
               </div>
 
-              <div class="absolute bottom-2 flex w-full items-center justify-center px-4">
-                <div class="w-full bg-white p-2">
+              <div class="absolute bottom-2 flex w-full items-center justify-center px-4 ">
+                <div class="w-full bg-white p-2 rounded-xl">
                   <h3 class="text-lg font-semibold">
                     <%= plant.common_name %>
                   </h3>
                   <p class="text-sm text-gray-600 font-semibold"><%= plant.scientific_name %></p>
-                  <p class="text-sm"><%= plant.type.name %></p>
+                  <p class="text-sm"><%= plant.type.name if plant.type %></p>
                 </div>
               </div>
             </div>
@@ -84,5 +120,10 @@
         </li>
       <% end %>
     </ul>
+
+    <!-- Pagination Controls -->
+    <div class="mt-6">
+      <%= paginate @plants %>
+    </div>
   </div>
 </div>

@@ -14,7 +14,7 @@ class Plant < ApplicationRecord
   has_many :propagation_plants
   has_many :propagations, through: :propagation_plants
 
-  validates :common_name, presence: true
+  validates :common_name, presence: true, uniqueness: true
 
   # Boolean validations
   validates :thorny, :invasive, :tropical, :indoor, :flower, :cones,

@@ -1,5 +1,88 @@
-<h1><%= @plant.common_name %></h1>
-<p>Scientific Name: <%= @plant.scientific_name %></p>
-<p>Description: <%= @plant.description %></p>
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <div class="flex flex-col md:flex-row">
+    <div class="md:w-1/3">
+      <% if @plant.image_url.present? %>
+        <img src="<%= @plant.image_url %>" alt="<%= @plant.common_name %>" class="w-full h-auto rounded-lg">
+      <% else %>
+        <div class="w-full h-64 bg-gray-200 flex items-center justify-center rounded-lg">
+          <p class="text-gray-500">Image not available</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="md:w-2/3 md:pl-6 mt-4 md:mt-0">
+      <h1 class="text-3xl font-bold text-gray-800"><%= @plant.common_name %></h1>
+      <p class="text-lg text-gray-600"><em><%= @plant.scientific_name %></em></p>
+      <p class="text-sm text-gray-500">Family: <%= @plant.family ? @plant.family : "none" %></p>
 
-<%= image_tag @plant.image_url %>
+      <p class="text-gray-700 mt-4"><%= @plant.description %></p>
+
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold text-gray-800">Characteristics</h2>
+        <ul class="list-inside list-disc text-gray-700 mt-2">
+          <li>Thorny: <%= @plant.thorny ? 'Yes' : 'No' %></li>
+          <li>Invasive: <%= @plant.invasive ? 'Yes' : 'No' %></li>
+          <li>Tropical: <%= @plant.tropical ? 'Yes' : 'No' %></li>
+          <li>Indoor Plant: <%= @plant.indoor ? 'Yes' : 'No' %></li>
+          <li>Flower Producing: <%= @plant.flower ? 'Yes' : 'No' %></li>
+          <li>Produces Cones: <%= @plant.cones ? 'Yes' : 'No' %></li>
+          <li>Produces Fruits: <%= @plant.fruits ? 'Yes' : 'No' %></li>
+          <li>Edible Fruit: <%= @plant.edible_fruit ? 'Yes' : 'No' %></li>
+          <li>Medicinal Uses: <%= @plant.medicinal ? 'Yes' : 'No' %></li>
+          <li>Poisonous to Humans: <%= @plant.poisonous_to_humans %></li>
+          <li>Poisonous to Pets: <%= @plant.poisonous_to_pets %></li>
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold text-gray-800">Plant Care</h2>
+        <ul class="list-inside list-disc text-gray-700 mt-2">
+          <li>
+            Origin:
+            <% if @plant.origin %>
+              <%= JSON.parse(@plant.origin.name).join(", ") %>
+            <% else %>
+              <span class="text-gray-500">No origin data available</span>
+            <% end %>
+          </li>
+          <li>Type: <%= @plant.type.name if @plant.type %></li>
+          <li>Watering Needs: <%= @plant.watering.level if @plant.watering %></li>
+          <li >Sunlight Needs:
+            <% if @plant.sunlights.any? %>
+                <div class="flex flex-col  ml-10">
+                <% @plant.sunlights.each do |sunlight| %>
+                  <span class=""><%= sunlight.name %></span>
+                <% end %>
+                </div>
+            <% end %>
+          </li>
+          <li>Growth Rate: <%= @plant.growth_rate.level if @plant.growth_rate %></li>
+          <li>Care requirements: <%= @plant.care.level if @plant.care %></li>
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold text-gray-800">Other Information</h2>
+        <ul class="list-inside list-disc text-gray-700 mt-2">
+          <li >Propagation methods:
+            <% if @plant.propagations.any? %>
+                <div class="flex flex-col ml-10">
+                <% @plant.propagations.each do |propagation| %>
+                  <span class=""><%= propagation.name %></span>
+                <% end %>
+                </div>
+            <% end %>
+          </li>
+          <li >Animals attracted:
+            <% if @plant.animals.any? %>
+                <div class="flex flex-col  ml-10">
+                <% @plant.animals.each do |animal| %>
+                  <span class=""><%= animal.name %></span>
+                <% end %>
+                </div>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
